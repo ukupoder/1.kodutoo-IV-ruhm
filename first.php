@@ -52,8 +52,6 @@ if (isset($_POST["signupPassword"]))
 	<body>
 	<h1> sign in </h1>
 		<form method="POST">
-			<input name="loginFirstname" placeholder="Firstname" type="firstname"><br>
-			<input name="loginLastname" placeholder="Lastname" type="lastname"><br>
 			<input name="loginEmail" placeholder="näide@näide.ee" type="email"><br>
 			<input name="loginPassword" placeholder="parool" type="password"><br>
 			
@@ -62,6 +60,8 @@ if (isset($_POST["signupPassword"]))
 		
 		<h1> sign up </h1>
 		<form method="POST">
+			<input name="signupFirstname" placeholder="Firstname" type="firstname"><br>
+			<input name="signupLastname" placeholder="Lastname" type="lastname"><br>
 			<input name="signupEmail" placeholder="näide@näide.ee" type="email"><?php echo $signupEmailError; ?><br>
 			<input name="signupPassword" placeholder="parool" type="password"><?php echo $signupPasswordError; ?><br>
 			
