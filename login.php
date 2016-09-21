@@ -36,6 +36,17 @@
 				$signupPasswordError="Parool peab olema vähemalt 8 tähemärki pikk.";
 		}
 	}	
+	
+	$gender = "";
+	
+	if (isset ($_POST["gender"])) {
+		if (empty ($_POST["gender"])) {
+			$genderError = "* Väli on kohustuslik!";
+		} else {
+			$gender = $_POST["gender"];
+		}
+		
+	} 
 ?>
 
 
@@ -66,12 +77,24 @@
 			<br>
 			
 			
-			<input type="radio" name="gender" value="female">Female
-			<input type="radio" name="gender" value="female" checked>Female
-			<input type="radio" name="gender" value="male">Male
-			<input type="radio" name="gender" value="male" checked>Male
-			<input type="radio" name="gender" value="other">Other
-			<input type="radio" name="gender" value="other" checked>Other
+			<?php if ($gender == "female") { ?>
+				<input type="radio" name="gender" value="female" checked> female<br>
+			<?php } else { ?>
+				<input type="radio" name="gender" value="female" > female<br>
+			<?php } ?>
+			
+			<?php if ($gender == "male") { ?>
+				<input type="radio" name="gender" value="male" checked> male<br>
+			<?php } else { ?>
+				<input type="radio" name="gender" value="male" > male<br>
+			<?php } ?>
+			
+			
+			<?php if ($gender == "other") { ?>
+				<input type="radio" name="gender" value="other" checked> other<br>
+			<?php } else { ?>
+				<input type="radio" name="gender" value="other" > other<br>
+			<?php } ?>
 			<br>
 		
 			<input type="submit" value="Create">

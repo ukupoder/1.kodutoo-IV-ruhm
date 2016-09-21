@@ -39,6 +39,17 @@ if (isset($_POST["signupPassword"]))
 }
 
 
+$gender = "";
+	
+	if (isset ($_POST["gender"])) {
+		if (empty ($_POST["gender"])) {
+			$genderError = "* Väli on kohustuslik!";
+		} else {
+			$gender = $_POST["gender"];
+		}
+		
+	} 
+
 ?>
 
 
