@@ -58,6 +58,7 @@ if (isset($_POST["signupPassword"]))
 			<input type="submit" value="Submit">
 		</form>
 		
+		
 		<h1> sign up </h1>
 		<form method="POST">
 			<input name="signupFirstname" placeholder="Firstname" type="firstname"><br>
