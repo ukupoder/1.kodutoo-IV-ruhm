@@ -75,7 +75,6 @@
 	{
 		
 		echo "Salvestan...<br>";
-		
 		$password = hash("sha512",$_POST["signupPassword"]);
 		//echo $password;
 		signup($signupEmail, $password);
