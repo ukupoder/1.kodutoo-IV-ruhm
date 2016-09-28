@@ -1,5 +1,7 @@
 <?php
+
 	require("../../config.php");
+	require("functions.php");
  
 	/*
 	var_dump($_GET);
@@ -75,36 +77,8 @@
 		echo "Salvestan...<br>";
 		
 		$password = hash("sha512",$_POST["signupPassword"]);
-		echo $password;
-		
-		$database ="if16_ukupode";
-		
-		$mysqli = new mysqli($serverHost, $serverUsername, $serverPassword, $database);
-		
-		
-		$stmt = $mysqli->prepare("INSERT INTO user_sample (email, password) VALUE (?, ?)");
-		
-		
-		
-		$stmt->bind_param("ss",$signupEmail, $password);
-		echo $mysql->error;
-		
-		if ($stmt->execute())
-		{
-			
-			echo "<br>õnnestus";
-			
-			
-		}
-		else
-		{
-			echo "error".$stmt->error;
-			
-		}
-		
-		
-		
-		
+		//echo $password;
+		signup($signupEmail, $password);
 	}
 	
 	
