@@ -35,7 +35,7 @@
 		if($stmt->fetch())
 		{
 			//oli olemas, rida käes
-			hash= hash("sha512", $password);
+			$hash = hash("sha512", $password);
 			if ($hash == $passwordFromDb)
 			{
 				

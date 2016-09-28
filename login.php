@@ -80,7 +80,15 @@
 		signup($signupEmail, $password);
 	}
 	
-	
+	if(isset($_POST["loginEmail"]) && 
+	isset($_POST["loginPassword"]) && 
+	!empty($_POST["loginEmail"]) && 
+	!empty($_POST["loginPassword"]))
+	{
+		
+		login($_POST["loginEmail"], $_POST["loginPassword"]);
+		
+	}
 	
 	
 ?>
@@ -118,13 +126,13 @@
 		
 		
 		<?php if ($gender == "female") { ?>
-			<input type="radio" name="gender" value="female" checked> female<br>
+			<input type="radio" name="gender" value="female"> female<br>
 		<?php } else { ?>
 			<input type="radio" name="gender" value="female" > female<br>
 		<?php } ?>
 		
 		<?php if ($gender == "male") { ?>
-			<input type="radio" name="gender" value="male" checked> male<br>
+			<input type="radio" name="gender" value="male"> male<br>
 		<?php } else { ?>
 			<input type="radio" name="gender" value="male" > male<br>
 		<?php } ?>
@@ -133,7 +141,7 @@
 		<?php if ($gender == "other") { ?>
 			<input type="radio" name="gender" value="other" checked> other<br>
 		<?php } else { ?>
-			<input type="radio" name="gender" value="other" > other<br>
+			<input type="radio" name="gender" value="other" checked> other<br>
 		<?php } ?>
 		<br>
 	
