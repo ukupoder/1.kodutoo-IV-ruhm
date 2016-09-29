@@ -2,6 +2,12 @@
 
 	require("../../config.php");
 	require("functions.php");
+	
+	
+	if (isset($_SESSION["userEmail"]))
+	{
+		header("Location: data.php");	
+	}
  
 	/*
 	var_dump($_GET);
@@ -12,10 +18,14 @@
 	
 	
 	
-
-	$signupEmailError = "";
 	$signupEmail = "";
-	$gender = "female";
+	$signupEmailError = "";
+	$notice = "";
+	$gender = "";
+	$genderError = "";
+	$signupPasswordError = "";
+	$signupUsernameError = "";
+	
 	if (isset($_POST["signupEmail"]))
 	{
 		if (empty($_POST["signupEmail"]))
@@ -32,10 +42,9 @@
 	
 	
 	
-	$gender = "";
-	$genderError = "";
+
 	
-	$signupPasswordError = "";
+
 
 	if (isset($_POST["signupPassword"]))
 	{
@@ -62,7 +71,7 @@
 	}	
 	
 	
-	$signupUsernameError = "";
+
 	
 	if (isset($_POST["signupUsername"]))
 	{
@@ -95,13 +104,15 @@
 		signup($signupEmail, $password);
 	}
 	
+
+	
 	if(isset($_POST["loginEmail"]) && 
 	isset($_POST["loginPassword"]) &&
 	!empty($_POST["loginEmail"]) && 
 	!empty($_POST["loginPassword"]))
 	{
 		
-		login($_POST["loginEmail"], $_POST["loginPassword"]);
+		$notice =login($_POST["loginEmail"], $_POST["loginPassword"]);
 		
 	}
 	
@@ -118,6 +129,7 @@
 	</head>
 	<body>
 	<h1> sign in </h1>
+	<p style="color:red"><?php echo $notice;?></p>
 	<form method="POST">
 		<input name="loginEmail" placeholder="näide@näide.ee" type="email">
 		<br>

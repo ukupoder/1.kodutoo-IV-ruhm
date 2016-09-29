@@ -1,4 +1,7 @@
 <?php
+	//see fail peab olema seotud kõigiga kus soovime sessooni kasutada'
+	//saab kasutada nüüd $_session muutujat
+	session_start();
 	$database = "if16_ukupode";
 	
 	function signup($email,$password)
@@ -21,6 +24,8 @@
 	function login($email,$password)
 	{
 		
+		$notice = "";
+		
 		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
 		$stmt = $mysqli->prepare
 		(
@@ -38,24 +43,27 @@
 			$hash = hash("sha512", $password);
 			if ($hash == $passwordFromDb)
 			{
+				echo "kasutaja ".$id." logis sisse";
 				
-				echo "kasutaja ".$id."logis sisse";
-				
+				$_SESSION["userID"]= $id;
+				$_SESSION["userEmail"]= $emailFromDb;
+				header("Location: data.php");	
 			}
 			else
 			{
 				
-				echo "parool";
+				$notice = "parool vale ";
 			}
 		}
 		else
 		{
 			//ei olnud ühtegi rida
-			echo "Sellise emailiga ".$email." kasutaja ei ole olemas";
+			$notice = "Sellise emailiga ".$email." kasutaja ei ole olemas";
+			
 			
 			
 		}
-		
+		return $notice;
 		
 	}
 
