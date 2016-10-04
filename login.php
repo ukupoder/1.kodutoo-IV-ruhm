@@ -108,11 +108,13 @@
 	
 	if(isset($_POST["loginEmail"]) && 
 	isset($_POST["loginPassword"]) &&
+	isset($_POST["loginUsername"]) && 
 	!empty($_POST["loginEmail"]) && 
+	!empty($_POST["loginUsername"]) &&
 	!empty($_POST["loginPassword"]))
 	{
 		
-		$notice =login($_POST["loginEmail"], $_POST["loginPassword"]);
+		$notice =login($_POST["loginUsername"],$_POST["loginEmail"], $_POST["loginPassword"]);
 		
 	}
 	

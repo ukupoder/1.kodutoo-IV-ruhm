@@ -4,12 +4,12 @@
 	session_start();
 	$database = "if16_ukupode";
 	
-	function signup($email,$password)
+	function signup($username,$email,$password)
 	{
 		$database ="if16_ukupode";
 		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
-		$stmt = $mysqli->prepare("INSERT INTO user_sample (email, password) VALUE (?, ?)");
-		$stmt->bind_param("ss",$email, $password);
+		$stmt = $mysqli->prepare("INSERT INTO user_sample (username, email, password) VALUE (?, ?)");
+		$stmt->bind_param("sss",$username,$email, $password);
 		echo $mysqli->error;
 		if ($stmt->execute())
 		{
@@ -21,7 +21,7 @@
 		}
 	}
 
-	function login($email,$password)
+	function login($username,$email,$password)
 	{
 		
 		$notice = "";
@@ -29,12 +29,12 @@
 		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
 		$stmt = $mysqli->prepare
 		(
-		"SELECT id,email,password,created FROM user_sample WHERE email = ? "
+		"SELECT id,username,email,password,created FROM user_sample WHERE email = ? "
 		);
 		
 		echo $mysqli->error;
 		$stmt->bind_param("s",$email);
-		$stmt->bind_result($id, $emailFromDb, $passwordFromDb, $created);
+		$stmt->bind_result($id, $usernameFromDb, $emailFromDb, $passwordFromDb, $created);
 		$stmt->execute();
 		//see fetch on ainult SELECT'i puhul
 		if($stmt->fetch())
