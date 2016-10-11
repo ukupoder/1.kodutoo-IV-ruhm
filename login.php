@@ -23,8 +23,38 @@
 	$notice = "";
 	$gender = "";
 	$genderError = "";
+	$loginUsername = "";
+	$loginUsernameError= "";
+	$loginPasswordError=
 	$signupPasswordError = "";
 	$signupUsernameError = "";
+	
+	
+	if (isset($_POST["loginUsername"]))
+	{
+		if (empty($_POST["loginUsername"]))
+		{
+			$loginUsernameError= "Väli on kohustuslik";	
+		}
+		else
+		{
+			$loginUsername = $_POST["loginUsername"];
+			if (isset($_POST["loginPassword"]))
+			{
+				if (empty($_POST["loginPassword"]))
+				{
+					$loginPasswordError= "Väli on kohustuslik";
+					
+				}
+				else
+				{
+					
+				}
+			}
+		}
+	}
+	
+	
 	
 	if (isset($_POST["signupEmail"]))
 	{
@@ -60,7 +90,7 @@
 		
 		if (isset($_POST["gender"]))
 		{
-			
+			$gender = ($_POST["gender"]);
 		}
 		else
 		{
@@ -70,7 +100,7 @@
 	
 	}	
 	
-	
+
 
 	
 	if (isset($_POST["signupUsername"]))
@@ -89,8 +119,10 @@
 
 	if ($signupEmailError == "" &&
 		$signupPasswordError == "" &&
+		$genderError == "" &&
 		$signupUsernameError == "" &&
 		isset ($_POST["signupEmail"]) &&
+		isset ($_POST["gender"]) &&
 		isset ($_POST["signupPassword"]) &&
 		isset ($_POST["signupUsername"])
 			
@@ -101,20 +133,18 @@
 		echo "Salvestan...<br>";
 		$password = hash("sha512",$_POST["signupPassword"]);
 		//echo $password;
-		signup($signupEmail, $password);
+		signup($signupEmail, $password, $signupUsername, $gender);
 	}
 	
 
 	
-	if(isset($_POST["loginEmail"]) && 
-	isset($_POST["loginPassword"]) &&
-	isset($_POST["loginUsername"]) && 
-	!empty($_POST["loginEmail"]) && 
+	if(isset($_POST["loginUsername"]) &&
+	isset($_POST["loginPassword"])&& 
 	!empty($_POST["loginUsername"]) &&
 	!empty($_POST["loginPassword"]))
 	{
 		
-		$notice =login($_POST["loginUsername"],$_POST["loginEmail"], $_POST["loginPassword"]);
+		$notice =login($_POST["loginUsername"],$_POST["loginPassword"]);
 		
 	}
 	
@@ -133,9 +163,9 @@
 	<h1> sign in </h1>
 	<p style="color:red"><?php echo $notice;?></p>
 	<form method="POST">
-		<input name="loginEmail" placeholder="näide@näide.ee" type="email">
+		<input name="loginUsername" placeholder="Username" type="Username" value="<?=$loginUsername;?>"><?php echo $loginUsernameError; ?>
 		<br>
-		<input name="loginPassword" placeholder="parool" type="password">
+		<input name="loginPassword" placeholder="parool" type="password"><?php echo $loginPasswordError; ?>
 		<br>
 		<input type="submit" value="Submit">
 	</form>
